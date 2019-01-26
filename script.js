@@ -128,7 +128,7 @@ async function select(cardId) {
       showCards()
       deselectAll()
     } else {
-      showModal('❌')
+      await showModal('❌')
       deselectAll()
     }
   }
