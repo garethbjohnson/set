@@ -1,0 +1,117 @@
+/* TODO: Make the squiggles and diamonds look like diamonds and squiggles. */
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  background-color: whitesmoke;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  margin: 0;
+  width: 100%;
+}
+
+#table {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+  width: 1000px;
+}
+
+.card {
+  align-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: center;
+  margin: 20px;
+  width: 200px;
+}
+
+.card.selected {
+  border: 3px solid rgba(63, 191, 255, 0.5);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.shape {
+  border: 3px solid;
+  width: 120px;
+  height: 40px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.shape-diamond {
+  height: 30px;
+  transform: rotate(30deg);
+}
+.shape-sausage {
+  border-radius: 30px;
+}
+
+.color-green {
+  background: green;
+  border-color: green;
+}
+.color-purple {
+  background: purple;
+  border-color: purple;
+}
+.color-red {
+  background: red;
+  border-color: red;
+}
+
+.shade-empty {
+  background: none;
+}
+.color-green.shade-half {
+  background: rgba(0, 255, 0, 0.5);
+}
+.color-purple.shade-half {
+  background: rgba(255, 0, 255, 0.5);
+}
+.color-red.shade-half {
+  background: rgba(255, 0, 0, 0.5);
+}
+
+#modal {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  content: 'hi';
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: opacity 0.2s;
+  width: 100%;
+  z-index: 9999;
+}
+
+#modal-content {
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 24px 36px rgba(0, 0, 0, 0.2);
+  display: flex;
+  font-size: 64px;
+  height: 200px;
+  justify-content: center;
+  width: 200px;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
