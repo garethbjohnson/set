@@ -1,5 +1,3 @@
-/* TODO: Make the squiggles and diamonds look like diamonds and squiggles. */
-
 * {
   box-sizing: border-box;
 }
@@ -45,10 +43,13 @@ html {
 .shape {
   border: 3px solid;
   width: 120px;
-  height: 40px;
-  margin-bottom: 20px;
+  height: 48px;
+  margin-bottom: 16px;
   margin-left: 10px;
   margin-right: 10px;
+}
+.shape:last-of-type {
+  margin-bottom: 0;
 }
 
 .shape-diamond {
@@ -77,29 +78,35 @@ html {
 }
 .color-green.shade-half {
   background: repeating-linear-gradient(
-    -45deg,
+    90deg,
     transparent,
-    transparent 3px,
-    green 3px,
-    green 6px
+    transparent 1.5px,
+    green 1.5px,
+    green 4.5px,
+    transparent 4.5px,
+    transparent 6px
   );
 }
 .color-purple.shade-half {
   background: repeating-linear-gradient(
-    -45deg,
+    90deg,
     transparent,
-    transparent 3px,
-    purple 3px,
-    purple 6px
+    transparent 1.5px,
+    purple 1.5px,
+    purple 4.5px,
+    transparent 4.5px,
+    transparent 6px
   );
 }
 .color-red.shade-half {
   background: repeating-linear-gradient(
-    -45deg,
+    90deg,
     transparent,
-    transparent 3px,
-    red 3px,
-    red 6px
+    transparent 1.5px,
+    red 1.5px,
+    red 4.5px,
+    transparent 4.5px,
+    transparent 6px
   );
 }
 

@@ -38,7 +38,7 @@ const makeCardElement = ({ id, color, count, shade, shape }) => {
   element.onclick = () => select(id)
 
   for (let i = 0; i < count; i++) {
-    element.innerHTML += `<div class='shape color-${color} shade-${shade} shape-${shape}'></div>`
+    element.innerHTML += makeShapeElementHTML({ color, shade, shape })
   }
 
   return element
@@ -63,6 +63,88 @@ const makeDeck = () => {
 
   shuffle(deck)
   return deck
+}
+
+const makeShapeElementHTML = ({ color, shade, shape }) =>
+  shape === 'sausage'
+    ? `<div class='shape color-${color} shade-${shade} shape-${shape}'></div>`
+    : makeShapeHTML({ color, shade, shape })
+
+const makeShapeHTML = ({ color, shade, shape }) => {
+  let pathShapeAttributeString = ''
+  let fill = 'none'
+  let pattern = ''
+
+  if (shade === 'half') {
+    fill = `url(#stripes-${color})`
+    pattern = `
+      <pattern
+        id="stripes-${color}"
+        height="6"
+        width="6"
+        patternTransform="translate(4)"
+        patternUnits="userSpaceOnUse"
+      >
+        <line
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="6"
+          stroke="${color}"
+          stroke-width="6"
+        />
+      </pattern>
+    `
+  } else if (shade === 'full') {
+    fill = color
+  }
+
+  if (shape === 'squiggle') {
+    pathShapeAttributeString = `
+      d="
+        m 73.228964,48.592162
+        c -6.09,0.07 -11.13,-0.38 -17,-2.22
+          -6.57,-2.049996 -10.5,-5.199996 -18,-4.679996
+          -13.78,0.94 -26.22,18.489996 -34.1699999,3.86
+          -0.950004,-1.75 -1.700004,-4.02 -2.040004,-5.96
+          -1.16,-4.58 -1,-10.45 0,-15
+          1.06,-3.92 2.550004,-7.61 4.760004,-11
+          1.86,-2.85 3.6799999,-4.9399997 6.4899999,-6.8999997
+          19.26,-13.39 41.11,5.5499997 56.96,4.8599997
+          16.99,-0.74 29.099998,-22.27 35.469996,-0.96
+          3.4,20.78 -11.519996,37.759996 -32.469996,37.999996 z
+      "
+   `
+  } else if (shape === 'diamond') {
+    pathShapeAttributeString = `
+      d="
+        M 3,30
+          60,3
+          117,30
+          60,57 Z
+      "
+    `
+  } else {
+    throw new Error('`makeShapeHTML` allows only a diamond or squiggle.')
+  }
+
+  return `
+    <svg
+      height="60px"
+      width="120px"
+      viewBox="0 0 120px 58.732px"
+      xmlns="http://www.w3.org/2000/svg"
+      style="overflow:visible"
+    >
+      ${pattern}
+      <path
+        ${pathShapeAttributeString}
+        fill="${fill}"
+        stroke="${color}"
+        stroke-width="3"
+      />
+    </svg>
+  `
 }
 
 const replace = card => {
