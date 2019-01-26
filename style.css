@@ -76,13 +76,31 @@ html {
   background: none;
 }
 .color-green.shade-half {
-  background: rgba(0, 255, 0, 0.5);
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 3px,
+    green 3px,
+    green 6px
+  );
 }
 .color-purple.shade-half {
-  background: rgba(255, 0, 255, 0.5);
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 3px,
+    purple 3px,
+    purple 6px
+  );
 }
 .color-red.shade-half {
-  background: rgba(255, 0, 0, 0.5);
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 3px,
+    red 3px,
+    red 6px
+  );
 }
 
 #modal {
