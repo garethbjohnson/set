@@ -49,8 +49,7 @@ const makeDeck = () => {
 
   let id = 0
 
-  // for (color of ['green', 'purple', 'red']) {
-  for (color of ['red']) {
+  for (color of ['green', 'purple', 'red']) {
     for (count of [1, 2, 3]) {
       for (shade of ['full', 'half', 'empty']) {
         for (shape of ['diamond', 'sausage', 'squiggle']) {
