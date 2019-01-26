@@ -1,15 +1,60 @@
+:focus {
+  outline: 0 !important;
+}
+
 * {
   box-sizing: border-box;
 }
 
-body,
 html {
   background-color: whitesmoke;
-  display: flex;
   height: 100%;
-  justify-content: center;
   margin: 0;
+  padding: 0;
   width: 100%;
+}
+
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-size: 24px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+button {
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  background-color: grey;
+  border-radius: 3px;
+  border: none;
+  color: whitesmoke;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 16px;
+  padding: 8px 12px;
+  text-align: center;
+  transition: background-color 0.2s;
+  user-select: none;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+button:hover {
+  background-color: darkgrey;
+}
+
+.bar {
+  color: grey;
+  display: flex;
+  justify-content: space-evenly;
+  width: 1000px;
 }
 
 #table {

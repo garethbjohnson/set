@@ -1,12 +1,10 @@
-// TODO: Allow resets.
-// TODO: Track points.
-
 const modalElement = document.getElementById('modal')
 const tableElement = document.getElementById('table')
 
 let deck = []
 let selectedCards = []
 let shownCards = []
+let points = 0
 
 const deselect = card => {
   card.element.classList.remove('selected')
@@ -158,6 +156,14 @@ const replace = card => {
   }
 }
 
+const showCards = () => {
+  tableElement.innerHTML = ''
+
+  shownCards.map(card => {
+    tableElement.append(card.element)
+  })
+}
+
 async function showModal(content) {
   const modalContentElement = document.getElementById('modal-content')
   modalContentElement.innerHTML = content
@@ -173,6 +179,11 @@ async function showModal(content) {
       1000
     )
   )
+}
+
+function showPoints() {
+  const pointsElement = document.getElementById('points')
+  pointsElement.innerText = String(points)
 }
 
 const shuffle = cards => {
@@ -206,6 +217,8 @@ async function select(cardId) {
 
     if (cardsAreValidSet) {
       await showModal('🎉')
+      points++
+      showPoints()
       selectedCards.map(selectedCard => replace(selectedCard))
       showCards()
       deselectAll()
@@ -216,19 +229,14 @@ async function select(cardId) {
   }
 }
 
-const showCards = () => {
-  tableElement.innerHTML = ''
-
-  shownCards.map(card => {
-    tableElement.append(card.element)
-  })
-}
-
 const start = () => {
   deck = makeDeck()
   shownCards = deck.splice(0, 12)
   selectedCards = []
   showCards()
+
+  points = 0
+  showPoints()
 }
 
 start()
