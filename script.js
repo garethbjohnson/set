@@ -190,6 +190,11 @@ async function select(cardId) {
       showCards()
       deselectAll()
       showPossibleSetsCount()
+
+      if (shownCards.length === 0) {
+        const tableElement = document.getElementById('table')
+        tableElement.innerHTML = '<div class="congratulations">🎉</div>'
+      }
     } else {
       await showModal('❌')
       deselectAll()
