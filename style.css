@@ -26,7 +26,7 @@ body {
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-size: 24px;
   justify-content: center;
-  margin-top: 24px;
+  margin: 24px 0;
 }
 
 button {
@@ -53,6 +53,7 @@ button:hover {
 }
 
 .bar {
+  align-items: baseline;
   color: grey;
   display: flex;
   font-size: 40px;
@@ -67,7 +68,6 @@ button:hover {
   flex-wrap: wrap;
   height: calc(3 * calc(300px + calc(2 * 20px)));
   justify-content: center;
-  margin: auto;
   width: 1000px;
 }
 
