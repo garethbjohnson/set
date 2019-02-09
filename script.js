@@ -239,6 +239,34 @@ const showCards = () => {
   })
 }
 
+async function showHint() {
+  if (possibleSetIDArrays.length === 0) {
+    return
+  }
+
+  const selectedCardIDs = selectedCards.map(card => card.id)
+
+  let possibleSetIDs = possibleSetIDArrays.reduce((array1, array2) => array1.concat(array2))
+  possibleSetIDs = new Set(possibleSetIDs)
+  possibleSetIDs = Array.from(possibleSetIDs).filter(id => !selectedCardIDs.includes(id))
+
+  shuffle(possibleSetIDs)
+  const randomID = possibleSetIDs[0]
+
+  const card = shownCards.find(shownCard => shownCard.id === randomID)
+  card.element.className += ' hint'
+
+  await new Promise(resolve =>
+    setTimeout(
+      () => {
+        card.element.classList.remove('hint')
+        resolve()
+      },
+      1000
+    )
+  )
+}
+
 async function showModal(content) {
   const modalContentElement = document.getElementById('modal-content')
   modalContentElement.innerHTML = content

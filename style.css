@@ -72,6 +72,7 @@ button:hover {
   align-content: center;
   align-items: center;
   background-color: white;
+  border: 8px solid transparent;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   cursor: pointer;
@@ -80,12 +81,16 @@ button:hover {
   height: 300px;
   justify-content: center;
   margin: 20px;
+  transition: border-color 0.1s;
   width: 200px;
 }
 
+.card.hint {
+  border-color: rgba(255, 63, 63, 0.5);
+}
+
 .card.selected {
-  border: 8px solid rgba(63, 191, 255, 0.5);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  border-color: rgba(63, 191, 255, 0.5);
 }
 
 .shape {
