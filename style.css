@@ -7,10 +7,12 @@
 }
 
 html {
+  -ms-touch-action: manipulation;
   background-color: whitesmoke;
   height: 100%;
   margin: 0;
   padding: 0;
+  touch-action: manipulation;
   width: 100%;
 }
 
@@ -32,13 +34,13 @@ button {
   -ms-user-select: none;
   -webkit-user-select: none;
   background-color: grey;
-  border-radius: 3px;
+  border-radius: 8px;
   border: none;
   color: whitesmoke;
   cursor: pointer;
-  font-size: 16px;
-  line-height: 16px;
-  padding: 8px 12px;
+  font-size: 32px;
+  line-height: 1;
+  padding: 12px 16px;
   text-align: center;
   transition: background-color 0.2s;
   user-select: none;
@@ -53,6 +55,7 @@ button:hover {
 .bar {
   color: grey;
   display: flex;
+  font-size: 40px;
   justify-content: space-evenly;
   width: 1000px;
 }
@@ -81,7 +84,7 @@ button:hover {
 }
 
 .card.selected {
-  border: 3px solid rgba(63, 191, 255, 0.5);
+  border: 8px solid rgba(63, 191, 255, 0.5);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
