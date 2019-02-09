@@ -5,6 +5,17 @@ let deck = []
 let selectedCards = []
 let shownCards = []
 let points = 0
+let possibleSetIDArrays = []
+
+function compareID(card1, card2) {
+  if (card1.id < card2.id) {
+    return -1
+  } else if (card1.id > card2.id) {
+    return 1
+  } else {
+    return 0
+  }
+}
 
 const deselect = card => {
   card.element.classList.remove('selected')
@@ -156,6 +167,70 @@ const replace = card => {
   }
 }
 
+async function select(cardId) {
+  const card = shownCards.find(shownCard => shownCard.id === cardId)
+
+  const cardIsAlreadySelected = selectedCards.includes(card)
+  if (cardIsAlreadySelected) {
+    deselect(card)
+    return
+  }
+
+  selectedCards.push(card)
+  card.element.className += ' selected'
+
+  if (selectedCards.length === 3) {
+    const cardsAreValidSet = getIsValidCardSet(...selectedCards)
+
+    if (cardsAreValidSet) {
+      await showModal('🎉')
+      points++
+      showPoints()
+      selectedCards.map(selectedCard => replace(selectedCard))
+      showCards()
+      deselectAll()
+      showPossibleSetsCount()
+    } else {
+      await showModal('❌')
+      deselectAll()
+    }
+  }
+}
+
+function setPossibleSetIDArrays() {
+  let possibleSetIDArrayStrings = new Set()
+
+  const sortedShownCards = shownCards.slice().sort(compareID)
+
+  for (let index1 = 0; index1 < sortedShownCards.length; index1 += 1) {
+    const card1 = sortedShownCards[index1]
+    const shownCardsAfterCard1 = sortedShownCards.slice(index1 + 1)
+
+    for (let index2 = 0; index2 < shownCardsAfterCard1.length; index2 += 1) {
+      const card2 = shownCardsAfterCard1[index2]
+      const shownCardsAfterCard2 = shownCardsAfterCard1.slice(index2 + 1)
+
+      for (let index3 = 0; index3 < shownCardsAfterCard2.length; index3 += 1) {
+        const card3 = shownCardsAfterCard2[index3]
+
+        const cardsAreValidSet = getIsValidCardSet(card1, card2, card3)
+
+        if (cardsAreValidSet) {
+          let setIDs = [card1.id, card2.id, card3.id]
+          setIDs.sort()
+          const setIDsString = JSON.stringify(setIDs)
+          possibleSetIDArrayStrings.add(setIDsString)
+        }
+      }
+    }
+  }
+
+  possibleSetIDArrayStrings = Array.from(possibleSetIDArrayStrings)
+  possibleSetIDArrayStrings.sort()
+
+  possibleSetIDArrays = possibleSetIDArrayStrings.map(string => JSON.parse(string))
+}
+
 const showCards = () => {
   tableElement.innerHTML = ''
 
@@ -186,46 +261,23 @@ function showPoints() {
   pointsElement.innerText = String(points)
 }
 
-const shuffle = cards => {
-  for (let i = cards.length - 1; i > 0; i--) {
+function showPossibleSetsCount() {
+  const possibleSetsElement = document.getElementById('possible-sets')
+  setPossibleSetIDArrays()
+  possibleSetsElement.innerText = String(possibleSetIDArrays.length)
+}
+
+const shuffle = items => {
+  for (let i = items.length - 1; i > 0; i--) {
     const j = Math.floor(
       Math.random() * (i + 1)
     )
 
-    const cardI = cards[i]
-    const cardJ = cards[j]
+    const itemI = items[i]
+    const itemJ = items[j]
 
-    cards[i] = cardJ
-    cards[j] = cardI
-  }
-}
-
-async function select(cardId) {
-  const card = shownCards.find(shownCard => shownCard.id === cardId)
-
-  const cardIsAlreadySelected = selectedCards.includes(card)
-  if (cardIsAlreadySelected) {
-    deselect(card)
-    return
-  }
-
-  selectedCards.push(card)
-  card.element.className += ' selected'
-
-  if (selectedCards.length === 3) {
-    const cardsAreValidSet = getIsValidCardSet(...selectedCards)
-
-    if (cardsAreValidSet) {
-      await showModal('🎉')
-      points++
-      showPoints()
-      selectedCards.map(selectedCard => replace(selectedCard))
-      showCards()
-      deselectAll()
-    } else {
-      await showModal('❌')
-      deselectAll()
-    }
+    items[i] = itemJ
+    items[j] = itemI
   }
 }
 
@@ -237,6 +289,7 @@ const start = () => {
 
   points = 0
   showPoints()
+  showPossibleSetsCount()
 }
 
 start()
